@@ -90,7 +90,30 @@ public final class ImageAudit extends Thread{
 			m.getId(),
 			type.name()
 		));
-		if(can)m.mute(60*60);
+		if(can){
+			boolean mute=true;
+			try{
+				final Statement s=stor.createStatement();
+				final ResultSet c=s.executeQuery(format(
+					"select count(message) as counts "+
+					"from group_msg "+
+					"where group_id=%d and sender_id=%d and time>%d",
+					g.getId(),m.getId(),
+					System.currentTimeMillis()/1000-7*24*60*60
+				));
+				long cnt=c.getLong("counts");
+				c.close();
+				blog.info(format("user send %d messages in last week",cnt));
+				if(cnt>10){
+					blog.info(format("user %d is active and will not be muted",m.getId()));
+					mute=false;
+				}
+				c.close();
+			}catch(SQLException e){
+				blog.error("query database failed");
+			}
+			if(mute)m.mute(60*60);
+		}
 		if(iamAdmin(g))g.sendMessage(new At(g.getOwner().getId()));
 	}
 	private void doLarge(Group g,Member m){
