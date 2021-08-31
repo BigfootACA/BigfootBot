@@ -44,6 +44,7 @@ public final class Command{
 		addCommand(SimpleSayCommand.IdCommand.class);
 		addCommand(SimpleSayCommand.TimeCommand.class);
 		addCommand(SimpleSayCommand.PingCommand.class);
+		addCommand(SimpleSayCommand.VersionCommand.class);
 		addCommand(IPCalcCommand.IPCalcDecCommand.class);
 		addCommand(IPCalcCommand.IPCalcBinCommand.class);
 		addCommand(IPCalcCommand.IPCalcHexCommand.class);

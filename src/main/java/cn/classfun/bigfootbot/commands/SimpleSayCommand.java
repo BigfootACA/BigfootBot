@@ -4,6 +4,7 @@ import net.mamoe.mirai.event.events.GroupMessageEvent;
 import javax.annotation.Nonnull;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import static java.lang.String.format;
 public abstract class SimpleSayCommand extends CommandMain{
 	public abstract @Nonnull String sayWhat();
 	public @Override final void run(@Nonnull GroupMessageEvent event,@Nonnull String[] args){
@@ -37,4 +38,18 @@ public abstract class SimpleSayCommand extends CommandMain{
 	public final static class FishCommand extends ShellCommand{public @Override @Nonnull String getName(){return "fish";}}
 	public final static class ZshCommand extends ShellCommand{public @Override @Nonnull String getName(){return "zsh";}}
 	public final static class ShCommand extends ShellCommand{public @Override @Nonnull String getName(){return "sh";}}
+	public final static class VersionCommand extends SimpleSayCommand{
+		public @Override @Nonnull String sayWhat(){
+			final Package pkg=VersionCommand.class.getPackage();
+			return format(
+				"版本号: %s\n"+
+				"编译者: %s\n"+
+				"源代码: https://github.com/BigfootACA/BigfootBot\n"+
+				"协议  : GPLv3",
+				pkg.getImplementationVersion(),
+				pkg.getImplementationVendor()
+			);
+		}
+		public @Override @Nonnull String getName(){return "version";}
+	}
 }
