@@ -1,5 +1,6 @@
 package cn.classfun.bigfootbot.config;
 import cn.classfun.bigfootbot.core.*;
+import cn.classfun.bigfootbot.data.GitHubNotifier;
 import com.tencentcloudapi.common.Credential;
 import com.tencentcloudapi.common.profile.ClientProfile;
 import com.tencentcloudapi.common.profile.HttpProfile;
@@ -7,11 +8,13 @@ import com.tencentcloudapi.ims.v20201229.ImsClient;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import javax.annotation.Nonnull;
+import javax.annotation.meta.When;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.lang.annotation.Annotation;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -70,6 +73,14 @@ public final class ConfigParser{
 		cl.setHttpProfile(h);
 		c.setImsClient(new ImsClient(cred,api.getString("region"),cl));
 	}
+	private static void parseHookServer(@Nonnull Config c,@Nonnull JSONObject hs){
+		if(!hs.getBoolean("enabled")){
+			c.setHookServerPort(0);
+			return;
+		}
+		c.setHookServerPort(hs.getInt("port"));
+		c.setHookServerListen(hs.getString("listen"));
+	}
 	public static void parseConfig(@Nonnull Config c,@Nonnull JSONObject cfg){
 		parseQQ(c,cfg.getJSONObject("qq"));
 		parseTencentCloudAPI(c,cfg.getJSONObject("tencentcloudapi"));
@@ -78,10 +89,13 @@ public final class ConfigParser{
 		parseQuestions(c,cfg.getJSONArray("questions"));
 		parseGroups(c,cfg.getJSONArray("groups"));
 		parseStrings(c,cfg.getJSONArray("strings"));
+		if(cfg.has("hookserver"))parseHookServer(c,cfg.getJSONObject("hookserver"));
 		if(cfg.has("commands"))parseCommands(c,cfg.getJSONArray("commands"));
 		if(cfg.has("googletransapi"))Translate.setAPI(cfg.getString("googletransapi"));
 		UserChangeName.setRules(cfg.getJSONArray("change_name"));
 		MemberWelcome.setRules(cfg.getJSONArray("member_welcome"));
 		JoinRequest.setRules(cfg.getJSONArray("joinreq"));
+		GitHubNotifier.setRules(cfg.getJSONArray("github"));
+		HookServer.initHookServer();
 	}
 }
