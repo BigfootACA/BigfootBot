@@ -4,6 +4,7 @@ import com.sun.net.httpserver.HttpHandler;
 import java.io.IOException;
 public final class GitHubWebHook implements HttpHandler{
 	public static GitHubEvent[]handlers={
+		new GitHubPushEvent(),
 	};
 	public@Override void handle(HttpExchange e)throws IOException{
 		final GitHubHookProcess d=new GitHubHookProcess(e);
