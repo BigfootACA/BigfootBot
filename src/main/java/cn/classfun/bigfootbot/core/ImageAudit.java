@@ -57,11 +57,10 @@ public final class ImageAudit extends Thread{
 	private void doReject(ImageType type,Group g,Member m){
 		if(!iamAdmin(g))return;
 		switch(type){
-			case UNKNOWN:
-			case NORMAL:
-			case ABUSE:
-			case AD:
-			case OTHER:return;
+			case PORN:
+			case POLITY:
+			case TERROR:break;
+			default:return;
 		}
 		if(canOperate(m))MessageSource.recall(e.getMessage());
 		g.sendMessage(format(
