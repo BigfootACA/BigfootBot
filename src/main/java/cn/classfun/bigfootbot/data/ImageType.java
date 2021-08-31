@@ -6,7 +6,11 @@ public enum ImageType{
 	PORN(2),
 	ABUSE(3),
 	AD(4),
-	OTHER(5);
+	OTHER(5),
+	ILLEGAL(6),
+	POLITY(7),
+	TERROR(8),
+	SEXY(9);
 	int id;
 	ImageType(int i){id=i;}
 	public int getID(){return id;}
