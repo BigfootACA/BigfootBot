@@ -1,9 +1,10 @@
 package cn.classfun.bigfootbot.core;
-import cn.classfun.bigfootbot.commands.*;
 import cn.classfun.bigfootbot.data.CommandMain;
 import net.mamoe.mirai.contact.MemberPermission;
 import net.mamoe.mirai.event.events.GroupMessageEvent;
+import org.json.JSONArray;
 import javax.annotation.Nonnull;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import static cn.classfun.bigfootbot.BigfootBot.blog;
@@ -13,47 +14,20 @@ public final class Command{
 	public static final List<CommandMain>commands;
 	static{
 		commands=new ArrayList<>();
-		addCommand(ReloadCommand.class);
-		addCommand(FuckCommand.class);
-		addCommand(AskCommand.class);
-		addCommand(QuestionCommand.class);
-		addCommand(HelpCommand.DefaultHelpCommand.class);
-		addCommand(SummonCommand.SophonCommand.class);
-		addCommand(SummonCommand.BigfootCommand.class);
-		addCommand(TopCommand.TopAllCommand.class);
-		addCommand(TopCommand.TopDayCommand.class);
-		addCommand(TopCommand.TopHourCommand.class);
-		addCommand(TopCommand.TopWeekCommand.class);
-		addCommand(TopCommand.TopMonthCommand.class);
-		addCommand(TopCommand.TopHelpCommand.class);
-		addCommand(MuteCommand.MuteMeCommand.class);
-		addCommand(MuteCommand.RmCommand.class);
-		addCommand(MuteCommand.ExitCommand.class);
-		addCommand(MuteCommand.QuitCommand.class);
-		addCommand(MuteCommand.ResetCommand.class);
-		addCommand(MuteCommand.PowerOffCommand.class);
-		addCommand(MuteCommand.ShutdownCommand.class);
-		addCommand(MuteCommand.RebootCommand.class);
-		addCommand(SimpleSayCommand.DateCommand.class);
-		addCommand(SimpleSayCommand.ShellCommand.class);
-		addCommand(SimpleSayCommand.ShCommand.class);
-		addCommand(SimpleSayCommand.BashCommand.class);
-		addCommand(SimpleSayCommand.FishCommand.class);
-		addCommand(SimpleSayCommand.ZshCommand.class);
-		addCommand(SimpleSayCommand.WhoamiCommand.class);
-		addCommand(SimpleSayCommand.IdCommand.class);
-		addCommand(SimpleSayCommand.TimeCommand.class);
-		addCommand(SimpleSayCommand.PingCommand.class);
-		addCommand(SimpleSayCommand.VersionCommand.class);
-		addCommand(IPCalcCommand.IPCalcDecCommand.class);
-		addCommand(IPCalcCommand.IPCalcBinCommand.class);
-		addCommand(IPCalcCommand.IPCalcHexCommand.class);
-		addCommand(IPCalcCommand.IPCalcHelpCommand.class);
-		addCommand(TranslateCommand.TransENCommand.class);
-		addCommand(TranslateCommand.TransZHCommand.class);
-		addCommand(TranslateCommand.TransJPCommand.class);
-		addCommand(TranslateCommand.TransHelpCommand.class);
-		addCommand(MutedCommand.class);
+	}
+	public static void initCommands(){
+		try{
+			final InputStream in=Command.class.getClassLoader().getResourceAsStream("commands.json");
+			if(in==null)throw new NullPointerException("cannot read commands.json");
+			for(Object o:new JSONArray(new String(in.readAllBytes())))addCommand((String)o);
+			in.close();
+		}catch(Exception e){
+			throw new RuntimeException(e);
+		}
+	}
+	@SuppressWarnings("unchecked")
+	public static void addCommand(@Nonnull String ins)throws ClassNotFoundException{
+		addCommand((Class<? extends CommandMain>)Class.forName(ins));
 	}
 	public static void addCommand(@Nonnull Class<? extends CommandMain>ins){
 		try{

@@ -1,5 +1,6 @@
 package cn.classfun.bigfootbot;
 import cn.classfun.bigfootbot.config.Config;
+import cn.classfun.bigfootbot.core.Command;
 import cn.classfun.bigfootbot.events.*;
 import net.mamoe.mirai.Bot;
 import net.mamoe.mirai.BotFactory;
@@ -12,6 +13,7 @@ import java.io.IOException;
 import java.lang.reflect.ParameterizedType;
 import java.util.function.Consumer;
 import static cn.classfun.bigfootbot.config.Config.cfg;
+import static cn.classfun.bigfootbot.core.Command.commands;
 public final class BigfootBot {
 	public static Bot bot;
 	public static MiraiLogger blog;
@@ -22,7 +24,10 @@ public final class BigfootBot {
 			if(str.startsWith(opt))
 				config=str.substring(opt.length());
 		Config.initConfig(config);
+		Command.initCommands();
+		if(commands.size()<=0)throw new RuntimeException("no any commands found");
 		System.out.println("Parse config done");
+		System.out.printf("%d commands found\n",commands.size());
 		System.out.printf("QQ Number: %s\n",cfg.getQQNumber());
 		bot=BotFactory.INSTANCE.newBot(
 			cfg.getQQNumber(),
