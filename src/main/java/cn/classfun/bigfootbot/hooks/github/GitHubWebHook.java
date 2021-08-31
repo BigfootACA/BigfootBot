@@ -5,6 +5,7 @@ import java.io.IOException;
 public final class GitHubWebHook implements HttpHandler{
 	public static GitHubEvent[]handlers={
 		new GitHubPushEvent(),
+		new GitHubReleaseEvent(),
 	};
 	public@Override void handle(HttpExchange e)throws IOException{
 		final GitHubHookProcess d=new GitHubHookProcess(e);
