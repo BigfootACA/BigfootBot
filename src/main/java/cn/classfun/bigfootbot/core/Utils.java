@@ -56,5 +56,14 @@ public final class Utils{
 		if(name.trim().length()<=0)name=String.valueOf(m.getId());
 		return name;
 	}
+	public static String byte2hex(final byte[]b){
+		final StringBuilder sb=new StringBuilder();
+		for(byte v:b){
+			String s=Integer.toHexString(v&0xFF);
+			if(s.length()==1)sb.append('0');
+			sb.append(s);
+		}
+		return sb.toString();
+	}
 	private Utils(){throw new RuntimeException();}
 }
