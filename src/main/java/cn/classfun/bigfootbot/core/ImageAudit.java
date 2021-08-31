@@ -79,7 +79,6 @@ public final class ImageAudit extends Thread{
 			m.getId(),
 			type.name()
 		));
-		g.sendMessage(new At(g.getOwner().getId()));
 	}
 	private void doDenied(ImageType type,Group g,Member m){
 		boolean can=canOperate(m);
@@ -114,7 +113,6 @@ public final class ImageAudit extends Thread{
 			}
 			if(mute)m.mute(60*60);
 		}
-		if(iamAdmin(g))g.sendMessage(new At(g.getOwner().getId()));
 	}
 	private void doLarge(Group g,Member m){
 		if(canOperate(m))MessageSource.recall(e.getMessage());
