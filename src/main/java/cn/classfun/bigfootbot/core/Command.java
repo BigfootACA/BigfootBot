@@ -8,6 +8,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import static cn.classfun.bigfootbot.BigfootBot.blog;
+import static cn.classfun.bigfootbot.config.Config.cfg;
 import static cn.classfun.bigfootbot.config.Messager.randomStringReplyShortSend;
 import static java.lang.String.format;
 public final class Command{
@@ -20,6 +21,7 @@ public final class Command{
 			final InputStream in=Command.class.getClassLoader().getResourceAsStream("commands.json");
 			if(in==null)throw new NullPointerException("cannot read commands.json");
 			for(Object o:new JSONArray(new String(in.readAllBytes())))addCommand((String)o);
+			if(cfg.getCommands()!=null)for(String s:cfg.getCommands())addCommand(s);
 			in.close();
 		}catch(Exception e){
 			throw new RuntimeException(e);

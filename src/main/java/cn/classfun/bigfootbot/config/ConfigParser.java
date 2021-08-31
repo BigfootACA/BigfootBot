@@ -48,6 +48,11 @@ public final class ConfigParser{
 		});
 		c.setStrings(strs);
 	}
+	private static void parseCommands(@Nonnull Config c,@Nonnull JSONArray commands){
+		final List<String>cmds=new ArrayList<>();
+		commands.forEach(o->cmds.add((String)o));
+		c.setCommands(cmds);
+	}
 	private static void parseQQ(@Nonnull Config c,@Nonnull JSONObject qq){
 		c.setQQNumber(qq.getLong("number"));
 		c.setQQPassword(qq.getString("password"));
@@ -73,6 +78,7 @@ public final class ConfigParser{
 		parseQuestions(c,cfg.getJSONArray("questions"));
 		parseGroups(c,cfg.getJSONArray("groups"));
 		parseStrings(c,cfg.getJSONArray("strings"));
+		if(cfg.has("commands"))parseCommands(c,cfg.getJSONArray("commands"));
 		if(cfg.has("googletransapi"))Translate.setAPI(cfg.getString("googletransapi"));
 		UserChangeName.setRules(cfg.getJSONArray("change_name"));
 		MemberWelcome.setRules(cfg.getJSONArray("member_welcome"));

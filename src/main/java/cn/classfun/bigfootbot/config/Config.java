@@ -10,7 +10,7 @@ import static cn.classfun.bigfootbot.config.ConfigParser.parseConfig;
 import static java.lang.Math.random;
 import static java.lang.Math.round;
 import static java.util.Objects.requireNonNull;
-@SuppressWarnings("unused")
+//@SuppressWarnings("unused")
 public final class Config{
 	public static Config cfg=null;
 	private String config;
@@ -20,6 +20,7 @@ public final class Config{
 	private String msg_assets=null;
 	private List<Long>group=null;
 	private List<Question>questions=null;
+	private List<String>commands=null;
 	private Map<String,List<String>>strings=null;
 	private ImsClient ims=null;
 	public ImsClient getImsClient(){return ims;}
@@ -62,6 +63,8 @@ public final class Config{
 	}
 	public @Nonnull List<Question>getQuestions(){return requireNonNull(questions);}
 	public void setQuestions(@Nonnull List<Question>questions){this.questions=requireNonNull(questions);}
+	public @Nullable List<String>getCommands(){return commands;}
+	public void setCommands(@Nonnull List<String>commands){this.commands=requireNonNull(commands);}
 	public @Nonnull Map<String,List<String>>getStrings(){return requireNonNull(strings);}
 	public void setStrings(@Nonnull Map<String,List<String>>strings){this.strings=requireNonNull(strings);}
 	public void addStringsItem(@Nonnull String id,@Nonnull String item){getStringsList(id).add(item);}
