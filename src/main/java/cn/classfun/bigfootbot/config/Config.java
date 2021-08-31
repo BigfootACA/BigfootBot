@@ -14,6 +14,8 @@ import static java.util.Objects.requireNonNull;
 public final class Config{
 	public static Config cfg=null;
 	private String config;
+	private String hooksrv_listen="127.0.0.1";
+	private int hooksrv_port=0;
 	private long qq_number=0;
 	private String qq_password=null;
 	private String msg_database=null;
@@ -55,6 +57,10 @@ public final class Config{
 			throw new RuntimeException("Invalid QQ Password");
 		qq_password=password;
 	}
+	public @Nonnull String getHookServerListen(){return hooksrv_listen;}
+	public void setHookServerListen(@Nonnull String listen){this.hooksrv_listen=listen;}
+	public int getHookServerPort(){return hooksrv_port;}
+	public void setHookServerPort(int port){hooksrv_port=port;}
 	private Config(){}
 	private Config(@Nonnull String cfg)throws IOException{
 		if(Config.cfg!=null)throw new RuntimeException();
