@@ -14,4 +14,10 @@ public enum ImageType{
 		for(ImageType a:values())if(a.getID()==id)return a;
 		return null;
 	}
+	public static ImageType getType(String lbl){
+		for(ImageType a:values())
+			if(lbl.equalsIgnoreCase(a.name()))
+				return a;
+		return OTHER;
+	}
 }

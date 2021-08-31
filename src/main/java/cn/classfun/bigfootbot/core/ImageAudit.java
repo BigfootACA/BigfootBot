@@ -54,15 +54,6 @@ public final class ImageAudit extends Thread{
 			default:throw new IllegalArgumentException("invalid suggestion "+sug);
 		}
 	}
-	private static ImageType getType(String lbl){
-		switch(lbl.toLowerCase()){
-			case "normal":return NORMAL;
-			case "porn":return PORN;
-			case "abuse":return ABUSE;
-			case "ad":return AD;
-			default:return OTHER;
-		}
-	}
 	private void doReject(ImageType type,Group g,Member m){
 		if(!iamAdmin(g))return;
 		switch(type){
