@@ -1,4 +1,6 @@
 package cn.classfun.bigfootbot.hooks.github;
+import cn.classfun.bigfootbot.hooks.github.events.GitHubPushEvent;
+import cn.classfun.bigfootbot.hooks.github.events.GitHubReleaseEvent;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import java.io.IOException;

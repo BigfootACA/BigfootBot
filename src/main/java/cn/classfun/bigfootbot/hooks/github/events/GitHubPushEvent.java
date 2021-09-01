@@ -1,5 +1,7 @@
-package cn.classfun.bigfootbot.hooks.github;
+package cn.classfun.bigfootbot.hooks.github.events;
 import cn.classfun.bigfootbot.data.GitHubNotifier;
+import cn.classfun.bigfootbot.hooks.github.GitHubEvent;
+import cn.classfun.bigfootbot.hooks.github.GitHubHookProcess;
 import net.mamoe.mirai.contact.Group;
 import org.json.JSONArray;
 import org.json.JSONObject;
