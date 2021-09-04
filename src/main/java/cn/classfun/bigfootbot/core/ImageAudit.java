@@ -238,8 +238,9 @@ public final class ImageAudit extends Thread{
 		}
 	}
 	private int check_id;
+	private final int msg_id;
 	private final GroupMessageEvent e;
-	public ImageAudit(@Nonnull GroupMessageEvent e){this.e=e;}
+	public ImageAudit(@Nonnull GroupMessageEvent e,int msg_id){this.e=e;this.msg_id=msg_id;}
 	public@Override void run(){
 		for(SingleMessage s:e.getMessage()){
 			String id=null,url=null;

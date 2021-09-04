@@ -36,7 +36,7 @@ public final class OnGroupMessageEvent implements Consumer<GroupMessageEvent>{
 				e.getTime(),
 				b64.encodeString(mc.toString())
 			));
-			new ImageAudit(e).start();
+			new ImageAudit(e,msg_id).start();
 		}catch(Exception x){
 			blog.error("error while save message",x);
 		}
