@@ -8,7 +8,6 @@ import net.mamoe.mirai.contact.Member;
 import net.mamoe.mirai.contact.NormalMember;
 import net.mamoe.mirai.event.events.GroupMessageEvent;
 import net.mamoe.mirai.message.data.MessageChain;
-import java.sql.Statement;
 import java.util.function.Consumer;
 import static cn.classfun.bigfootbot.BigfootBot.blog;
 import static cn.classfun.bigfootbot.config.Config.cfg;
@@ -27,9 +26,8 @@ public final class OnGroupMessageEvent implements Consumer<GroupMessageEvent>{
 		final String msg=e.getMessage().contentToString().trim();
 		final Member send=e.getSender();
 		try{
-			final Statement sm=stor.con.createStatement();
 			final MessageChain mc=e.getMessage();
-			sm.execute(format(
+			final int msg_id=stor.insertAndReturnId(format(
 				"insert into group_msg"+
 				"(group_id,sender_id,time,message)VALUES"+
 				"(%d,%d,%d,'%s')",
@@ -38,7 +36,6 @@ public final class OnGroupMessageEvent implements Consumer<GroupMessageEvent>{
 				e.getTime(),
 				b64.encodeString(mc.toString())
 			));
-			sm.closeOnCompletion();
 			new ImageAudit(e).start();
 		}catch(Exception x){
 			blog.error("error while save message",x);
