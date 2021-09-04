@@ -39,6 +39,7 @@ public abstract class SimpleSayCommand extends CommandMain{
 	public final static class ZshCommand extends ShellCommand{public @Override @Nonnull String getName(){return "zsh";}}
 	public final static class ShCommand extends ShellCommand{public @Override @Nonnull String getName(){return "sh";}}
 	public final static class VersionCommand extends SimpleSayCommand{
+		public @Override boolean isVisible(){return true;}
 		public @Override @Nonnull String sayWhat(){
 			final Package pkg=VersionCommand.class.getPackage();
 			return format(
