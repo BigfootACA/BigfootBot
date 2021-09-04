@@ -66,7 +66,7 @@ public final class ImageAudit extends Thread{
 		if(canOperate(m))MessageSource.recall(e.getMessage());
 		g.sendMessage(format(
 			"%s (%d) 尝试发送疑似违规的图片(%s) ID:%d",
-			m.getNick(),
+			Utils.getName(m),
 			m.getId(),
 			type.name(),
 			check_id
@@ -77,7 +77,7 @@ public final class ImageAudit extends Thread{
 		if(can)MessageSource.recall(e.getMessage());
 		g.sendMessage(format(
 			"%s (%d) 尝试发送违规的图片(%s) ID:%d",
-			m.getNick(),
+			Utils.getName(m),
 			m.getId(),
 			type.name(),
 			check_id
