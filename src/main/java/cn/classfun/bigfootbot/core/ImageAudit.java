@@ -65,20 +65,22 @@ public final class ImageAudit extends Thread{
 		}
 		if(canOperate(m))MessageSource.recall(e.getMessage());
 		g.sendMessage(format(
-			"%s (%d) 尝试发送疑似违规的图片(%s)",
+			"%s (%d) 尝试发送疑似违规的图片(%s) ID:%d",
 			m.getNick(),
 			m.getId(),
-			type.name()
+			type.name(),
+			check_id
 		));
 	}
 	private void doDenied(ImageType type,Group g,Member m){
 		boolean can=canOperate(m);
 		if(can)MessageSource.recall(e.getMessage());
 		g.sendMessage(format(
-			"%s (%d) 尝试发送违规的图片(%s)",
+			"%s (%d) 尝试发送违规的图片(%s) ID:%d",
 			m.getNick(),
 			m.getId(),
-			type.name()
+			type.name(),
+			check_id
 		));
 		if(can){
 			boolean mute=true;
