@@ -128,6 +128,17 @@ public final class ImageAudit extends Thread{
 				act.name(),type.name(),
 				f.length()
 			));
+			if(
+				act!=ImageAction.UNKNOWN&&
+				check_id>0&&msg_id>0
+			)stor.insertAndReturnId(format(
+				"insert into image_violation"+
+				"(check_id,group_id,member_id,msg_id,type,action,time)values"+
+				"(%d,%d,%d,%d,%d,%d,%d)",
+				check_id,g.getId(),m.getId(),
+				msg_id,type.getID(),act.getID(),
+				e.getTime()
+			));
 			switch(act){
 				case REJECT:doReject(type,g,m);break;
 				case DENIED:doDenied(type,g,m);break;
@@ -212,7 +223,6 @@ public final class ImageAudit extends Thread{
 				"tencentcloudapi response %s action %s type %s",
 				file.getName(),action.name(),type.name()
 			));
-			doAction(file,action,type);
 		}catch(Exception e){
 			blog.error("error while check image",e);
 		}
@@ -228,6 +238,10 @@ public final class ImageAudit extends Thread{
 			System.currentTimeMillis()/1000,
 			resp==null?"":b64.encodeString(toJsonString(resp))
 		));
+		if(
+			type!=ImageType.UNKNOWN&&
+			action!=ImageAction.UNKNOWN
+		)doAction(file,action,type);
 	}
 	public synchronized void processImage(String id,String url){
 		try{
