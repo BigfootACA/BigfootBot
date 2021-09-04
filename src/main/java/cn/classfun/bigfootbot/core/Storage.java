@@ -10,9 +10,13 @@ import java.nio.file.NotDirectoryException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLDataException;
 import static cn.classfun.bigfootbot.config.Config.cfg;
 import static java.lang.String.format;
 import static java.sql.DriverManager.getConnection;
+import static java.sql.Statement.RETURN_GENERATED_KEYS;
 public class Storage{
 	public static Storage stor=null;
 	private File assets;
@@ -148,5 +152,21 @@ public class Storage{
 			")"
 		);
 		sm.closeOnCompletion();
+	}
+	public int insertAndReturnId(String sql)throws SQLException{
+		final PreparedStatement sm=con.prepareStatement(sql,RETURN_GENERATED_KEYS);
+		if(sm.execute()){
+			sm.close();
+			throw new SQLException("cannot execute insert sql");
+		}
+		final ResultSet rs=sm.getGeneratedKeys();
+		if(rs==null||!rs.next()){
+			sm.closeOnCompletion();
+			throw new SQLDataException("failed to get inserted row");
+		}
+		int r=rs.getInt(1);
+		sm.closeOnCompletion();
+		if(r<=0)throw new SQLDataException("invalid row id");
+		return r;
 	}
 }
