@@ -27,6 +27,7 @@ import java.io.IOException;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.sql.ResultSet;
+import java.sql.SQLDataException;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Arrays;
@@ -166,6 +167,7 @@ public final class ImageAudit extends Thread{
 			return false;
 		}
 		blog.info(format("image %s already exists in database",file.getName()));
+		if((check_id=rs.getInt("id"))<=0)throw new SQLDataException("invalid check id");
 		doAction(
 			file,
 			ImageAction.get(rs.getInt("action")),
@@ -212,8 +214,7 @@ public final class ImageAudit extends Thread{
 		}catch(Exception e){
 			blog.error("error while check image",e);
 		}
-		final Statement sm=stor.con.createStatement();
-		sm.execute(format(
+		check_id=stor.insertAndReturnId(format(
 			"insert into image_check(url,save,name,type,action,size,time,response)values"+
 			"('%s','%s','%s',%d,%d,%d,%d,'%s')",
 			b64.encodeString(url),
@@ -225,7 +226,6 @@ public final class ImageAudit extends Thread{
 			System.currentTimeMillis()/1000,
 			resp==null?"":b64.encodeString(toJsonString(resp))
 		));
-		sm.close();
 	}
 	public synchronized void processImage(String id,String url){
 		try{
@@ -237,6 +237,7 @@ public final class ImageAudit extends Thread{
 			blog.error("error while process image",e);
 		}
 	}
+	private int check_id;
 	private final GroupMessageEvent e;
 	public ImageAudit(@Nonnull GroupMessageEvent e){this.e=e;}
 	public@Override void run(){
