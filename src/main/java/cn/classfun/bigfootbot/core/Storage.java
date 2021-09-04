@@ -133,20 +133,7 @@ public class Storage{
 				"size integer not null,"+
 				"time integer not null,"+
 				"response text"+
-				")"
-		);
-		sm.execute(
-			"create table if not exists image_check("+
-				"id integer primary key autoincrement,"+
-				"url text,"+
-				"save text not null,"+
-				"name text not null,"+
-				"type integer not null,"+
-				"action integer not null,"+
-				"size integer not null,"+
-				"time integer not null,"+
-				"response text"+
-				")"
+			")"
 		);
 		sm.closeOnCompletion();
 	}
