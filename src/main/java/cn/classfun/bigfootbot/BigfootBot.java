@@ -17,7 +17,7 @@ import static cn.classfun.bigfootbot.core.Command.commands;
 public final class BigfootBot {
 	public static Bot bot;
 	public static MiraiLogger blog;
-	public static void main(String[]argv) throws IOException, ReflectiveOperationException{
+	public static void earlyInit(String[]argv)throws IOException{
 		String config="/etc/bigfootbot.json";
 		final String opt="--config=";
 		for(String str:argv)
@@ -29,6 +29,9 @@ public final class BigfootBot {
 		System.out.println("Parse config done");
 		System.out.printf("%d commands found\n",commands.size());
 		System.out.printf("QQ Number: %s\n",cfg.getQQNumber());
+	}
+	public static void main(String[]argv) throws IOException, ReflectiveOperationException{
+		earlyInit(argv);
 		bot=BotFactory.INSTANCE.newBot(
 			cfg.getQQNumber(),
 			cfg.getQQPassword(),
