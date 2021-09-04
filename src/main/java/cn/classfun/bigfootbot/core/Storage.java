@@ -135,6 +135,18 @@ public class Storage{
 				"response text"+
 			")"
 		);
+		sm.execute(
+			"create table if not exists image_violation("+
+				"id integer primary key autoincrement,"+
+				"check_id integer not null,"+
+				"group_id integer not null,"+
+				"member_id integer not null,"+
+				"msg_id integer not null,"+
+				"type integer not null,"+
+				"action integer not null,"+
+				"time integer not null"+
+			")"
+		);
 		sm.closeOnCompletion();
 	}
 	public Statement createStatement()throws SQLException{return con.createStatement();}
