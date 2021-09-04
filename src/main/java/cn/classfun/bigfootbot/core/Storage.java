@@ -16,7 +16,7 @@ import static java.sql.DriverManager.getConnection;
 public class Storage{
 	public static Storage stor=null;
 	private File assets;
-	private Connection con;
+	public Connection con;
 	public File getAssets(){return assets;}
 	public void parseStorage(@Nonnull Config c,@Nonnull JSONObject stor){
 		c.setMessageAssets(stor.getString("assets"));
@@ -149,5 +149,4 @@ public class Storage{
 		);
 		sm.closeOnCompletion();
 	}
-	public Statement createStatement()throws SQLException{return con.createStatement();}
 }

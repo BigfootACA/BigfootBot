@@ -82,7 +82,7 @@ public final class ImageAudit extends Thread{
 		if(can){
 			boolean mute=true;
 			try{
-				final Statement s=stor.createStatement();
+				final Statement s=stor.con.createStatement();
 				final ResultSet c=s.executeQuery(format(
 					"select count(message) as counts "+
 					"from group_msg "+
@@ -142,7 +142,7 @@ public final class ImageAudit extends Thread{
 		return file;
 	}
 	private boolean checkDownloaded(File file,String id)throws SQLException{
-		final Statement sm=stor.createStatement();
+		final Statement sm=stor.con.createStatement();
 		final ResultSet rs=sm.executeQuery(format(
 			"select * from image_check where name='%s'",
 			b64.encodeString(id)
@@ -212,7 +212,7 @@ public final class ImageAudit extends Thread{
 		}catch(Exception e){
 			blog.error("error while check image",e);
 		}
-		final Statement sm=stor.createStatement();
+		final Statement sm=stor.con.createStatement();
 		sm.execute(format(
 			"insert into image_check(url,save,name,type,action,size,time,response)values"+
 			"('%s','%s','%s',%d,%d,%d,%d,'%s')",

@@ -10,7 +10,7 @@ public final class OnMemberUnmuteEvent implements Consumer<MemberUnmuteEvent>{
 	@Override
 	public void accept(MemberUnmuteEvent e){
 		try{
-			final Statement sm=stor.createStatement();
+			final Statement sm=stor.con.createStatement();
 			final Member o=e.getOperator();
 			sm.execute(format(
 				"insert into group_mute"+

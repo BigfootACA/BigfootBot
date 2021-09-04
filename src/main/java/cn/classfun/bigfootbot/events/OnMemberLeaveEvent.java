@@ -9,7 +9,7 @@ public final class OnMemberLeaveEvent implements Consumer<MemberLeaveEvent>{
 	@Override
 	public void accept(MemberLeaveEvent e){
 		try{
-			final Statement sm=stor.createStatement();
+			final Statement sm=stor.con.createStatement();
 			sm.execute(format(
 				"insert into member_leave"+
 				"(group_id,member_id,operator_id,time)VALUES"+

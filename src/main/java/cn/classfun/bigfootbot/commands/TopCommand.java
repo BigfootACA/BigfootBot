@@ -20,7 +20,7 @@ public abstract class TopCommand extends CommandMain{
 		try{
 			final MessageChainBuilder m=new MessageChainBuilder().append(getPrefix());
 			final Group g=event.getGroup();
-			final Statement s=stor.createStatement();
+			final Statement s=stor.con.createStatement();
 			final ResultSet messages=s.executeQuery(format(
 				"select count(message) as counts "+
 				"from group_msg "+

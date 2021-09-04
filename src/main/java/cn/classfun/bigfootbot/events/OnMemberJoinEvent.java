@@ -14,7 +14,7 @@ public final class OnMemberJoinEvent implements Consumer<MemberJoinEvent>{
 		final Group g=e.getGroup();
 		final NormalMember m=e.getMember();
 		try{
-			final Statement sm=stor.createStatement();
+			final Statement sm=stor.con.createStatement();
 			sm.execute(format(
 				"insert into member_join"+
 				"(group_id,member_id,time)VALUES"+

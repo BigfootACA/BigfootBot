@@ -27,7 +27,7 @@ public final class OnGroupMessageEvent implements Consumer<GroupMessageEvent>{
 		final String msg=e.getMessage().contentToString().trim();
 		final Member send=e.getSender();
 		try{
-			final Statement sm=stor.createStatement();
+			final Statement sm=stor.con.createStatement();
 			final MessageChain mc=e.getMessage();
 			sm.execute(format(
 				"insert into group_msg"+

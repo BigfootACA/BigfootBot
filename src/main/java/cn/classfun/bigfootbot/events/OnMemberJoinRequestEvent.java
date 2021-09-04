@@ -15,7 +15,7 @@ public final class OnMemberJoinRequestEvent implements Consumer<MemberJoinReques
 	@Override
 	public void accept(MemberJoinRequestEvent e){
 		try{
-			final Statement sm=stor.createStatement();
+			final Statement sm=stor.con.createStatement();
 			final NormalMember o=e.getInvitor();
 			sm.execute(format(
 				"insert into member_join_request"+

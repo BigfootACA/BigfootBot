@@ -12,7 +12,7 @@ public final class OnGroupNameChangeEvent implements Consumer<GroupNameChangeEve
 	@Override
 	public void accept(GroupNameChangeEvent e){
 		try{
-			final Statement sm=stor.createStatement();
+			final Statement sm=stor.con.createStatement();
 			final NormalMember o=e.getOperator();
 			sm.execute(format(
 				"insert into group_rename"+
