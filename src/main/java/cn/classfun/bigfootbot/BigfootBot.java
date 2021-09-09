@@ -11,12 +11,14 @@ import net.mamoe.mirai.utils.BotConfiguration;
 import net.mamoe.mirai.utils.MiraiLogger;
 import java.io.IOException;
 import java.lang.reflect.ParameterizedType;
+import java.text.SimpleDateFormat;
 import java.util.function.Consumer;
 import static cn.classfun.bigfootbot.config.Config.cfg;
 import static cn.classfun.bigfootbot.core.Command.commands;
 public final class BigfootBot {
 	public static Bot bot;
 	public static MiraiLogger blog;
+	public static SimpleDateFormat sdf=new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 	public static void earlyInit(String[]argv)throws IOException{
 		String config="/etc/bigfootbot.json";
 		final String opt="--config=";
