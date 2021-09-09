@@ -45,5 +45,8 @@
 	"cn.classfun.bigfootbot.commands.TranslateCommand$TransZHCommand",
 	"cn.classfun.bigfootbot.commands.TranslateCommand$TransJPCommand",
 	"cn.classfun.bigfootbot.commands.TranslateCommand$TransHelpCommand",
-	"cn.classfun.bigfootbot.commands.MutedCommand"
+	"cn.classfun.bigfootbot.commands.MutedCommand",
+	"cn.classfun.bigfootbot.commands.ArchCommand",
+	"cn.classfun.bigfootbot.commands.ArchCommand$ArchSearchCommand",
+	"cn.classfun.bigfootbot.commands.ArchCommand$ArchPackageCommand"
 ]
