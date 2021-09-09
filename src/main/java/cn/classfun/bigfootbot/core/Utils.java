@@ -10,6 +10,8 @@ import net.mamoe.mirai.message.data.QuoteReply;
 import org.json.JSONArray;
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import static cn.classfun.bigfootbot.config.Messager.randomStringAtWhoShortSend;
 import static net.mamoe.mirai.contact.MemberPermission.*;
@@ -64,6 +66,15 @@ public final class Utils{
 			sb.append(s);
 		}
 		return sb.toString();
+	}
+	public static String array2string(Collection<String>lst,String sep){
+		final StringBuilder sb=new StringBuilder();
+		lst.forEach(s->sb.append(s).append(sep));
+		if(sb.length()>0)sb.setLength(sb.length()-sep.length());
+		return sb.toString();
+	}
+	public static String array2string(String[]lst,String sep){
+		return array2string(Arrays.asList(lst),sep);
 	}
 	private Utils(){throw new RuntimeException();}
 }
