@@ -60,7 +60,7 @@ public  final class JoinRequest{
 		if(g==null)return;
 		final long grp=g.getId();
 		final JoinRequest j=findRule(g.getId());
-		if(j==null||j.must.size()<=0||j.appear.size()<=0)return;
+		if(j==null||(j.must.size()<=0&&j.appear.size()<=0))return;
 		Map<Long,Integer>tried=tries.get(grp);
 		if(tried==null)tried=new HashMap<>();
 		final boolean success=j.check(e.getMessage());
