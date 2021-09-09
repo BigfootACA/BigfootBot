@@ -18,6 +18,7 @@ public final class MutedCommand extends CommandMain{
 		for(NormalMember m:g.getMembers())if(m.isMuted())ms.add(m);
 		final MessageChainBuilder b=Utils.buildReplyMsgShort(e);
 		if(ms.size()>20)b.append("\n有超过二十人被禁言，只显示二十人");
+		if(ms.size()<=0)b.append("\n没有人被禁言");
 		int c=0;
 		for(NormalMember m:ms){
 			if(c++>=20)break;
