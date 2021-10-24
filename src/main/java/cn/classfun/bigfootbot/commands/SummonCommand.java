@@ -50,7 +50,7 @@ public abstract class SummonCommand extends CommandMain{
 	}
 	public static final class SunflowerCommand extends SummonCommand{
 		public @Nonnull @Override String getName(){return "sunflower";}
-		public @Override long getTargetNumber(){return 2918296917;}
+		public @Override long getTargetNumber(){return 2918296917L;}
 		public @Nonnull @Override String getSummonString(){return "GOD Sunflower2333";}
 		public @Override boolean isVisible(){return false;}
 	}
