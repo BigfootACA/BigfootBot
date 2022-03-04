@@ -7,6 +7,7 @@
 	"cn.classfun.bigfootbot.commands.SummonCommand$SophonCommand",
 	"cn.classfun.bigfootbot.commands.SummonCommand$BigfootCommand",
 	"cn.classfun.bigfootbot.commands.SummonCommand$SunflowerCommand",
+	"cn.classfun.bigfootbot.commands.SummonCommand$KancyCommand",
 	"cn.classfun.bigfootbot.commands.TopCommand$TopAllCommand",
 	"cn.classfun.bigfootbot.commands.TopCommand$TopDayCommand",
 	"cn.classfun.bigfootbot.commands.TopCommand$TopHourCommand",

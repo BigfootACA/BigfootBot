@@ -54,6 +54,12 @@ public abstract class SummonCommand extends CommandMain{
 		public @Nonnull @Override String getSummonString(){return "GOD Sunflower2333";}
 		public @Override boolean isVisible(){return false;}
 	}
+	public static final class KancyCommand extends SummonCommand{
+		public @Nonnull @Override String getName(){return "kancy";}
+		public @Override long getTargetNumber(){return 3080390838L;}
+		public @Nonnull @Override String getSummonString(){return "Kancy作业写完了吗~";}
+		public @Override boolean isVisible(){return false;}
+	}
 	public static final class SummonHelpCommand extends HelpCommand{
 		public @Override @Nonnull String getName(){return "summon";}
 		public @Override boolean isShow(@Nonnull CommandMain cmd){return cmd instanceof SummonCommand;}
